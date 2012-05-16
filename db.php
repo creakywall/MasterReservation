@@ -10,9 +10,11 @@ try {
     echo 'Connection failed: ' . $e->getMessage();
 }
 
+$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 $sql = 'SELECT room_ID,building_ID,room_name,cast(room_active as unsigned integer) roomActive,startOpenTime,endOpenTime FROM room';
 
-try{
+try {
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute();
 
@@ -23,14 +25,13 @@ try{
 	$stmt->bindColumn(5, $startOpenTime);
 	$stmt->bindColumn(6, $endOpenTime);
 
-	while ($row = $stmt->fetch(PDO::FETCH_BOUND)){
+	while ($row = $stmt->fetch(PDO::FETCH_BOUND)) {
 		$data = $roomID . "\t" . $building_ID . "\t" . $roomName . "\t" . $roomActive . "\t" . $startOpenTime . "\t" . $endOpenTime . "<br />";
-	print $data;
+		print $data;
 	}
-  }
-  catch (PDOException $e) {
+} catch (PDOException $e) {
     print $e->getMessage();
-  }
+}
 ?>
 <html>
 <head></head>

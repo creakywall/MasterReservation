@@ -1,0 +1,3 @@
+Joey: I had a very detailed commit message the first time around, but was having trouble issuing commands. The problem can be attributed to my inexperience and I was able to get it working.. however, I used a "test" commit message. Further commits will be in greater detail.
+
+Clay

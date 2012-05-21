@@ -18,12 +18,12 @@ try {
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute();
 
-	$stmt->bindColumn(1, $roomID);
-	$stmt->bindColumn(2, $building_ID);
-	$stmt->bindColumn(3, $roomName);
-	$stmt->bindColumn(4, $roomActive);
-	$stmt->bindColumn(5, $startOpenTime);
-	$stmt->bindColumn(6, $endOpenTime);
+	$stmt->bindColumn('room_ID', $roomID);
+	$stmt->bindColumn('building_ID', $building_ID);
+	$stmt->bindColumn('room_name', $roomName);
+	$stmt->bindColumn('roomActive', $roomActive);
+	$stmt->bindColumn('startOpenTime', $startOpenTime);
+	$stmt->bindColumn('endOpenTime', $endOpenTime);
 
 	while ($row = $stmt->fetch(PDO::FETCH_BOUND)) {
 		$data = $roomID . "\t" . $building_ID . "\t" . $roomName . "\t" . $roomActive . "\t" . $startOpenTime . "\t" . $endOpenTime . "<br />";

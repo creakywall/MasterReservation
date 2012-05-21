@@ -1,11 +1,13 @@
 <?php
 require_once ('utility/master.php');
 
-$sql="Select ";
-
 ?>
-<p>index body</p>
 </body>
-	<p>This is the body!</p>
+	<p>Please select a building: </p>
+	<form>
+		<?php getBuildings(); ?>
+		<br /><input type="submit" value="Submit" onClick='listRooms()'/>
+	</form>
+	
 </body>
 </html>

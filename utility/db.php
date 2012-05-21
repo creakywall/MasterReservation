@@ -1,8 +1,11 @@
 <?php
 
+//This fucntion will provide database access
+function initializeDBcall(){
 $dsn = 'mysql:dbname=ureserve;host=127.0.0.1';
 $user='root';
 $password='';
+$dbh='';
 
 try {
     $dbh = new PDO($dsn, $user, $password);
@@ -11,31 +14,29 @@ try {
 }
 
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+return $dbh;
+}
 
-$sql = 'SELECT room_ID,building_ID,room_name,cast(room_active as unsigned integer) roomActive,startOpenTime,endOpenTime FROM room';
+//This function is designed to produce radio button output for the initial selection process.
+function getBuildings()
+{
+	$dbh = initializeDBcall();
+	$sql = 'select building_ID,building_name from buildings';
 
-try {
+	try {
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute();
 
-	$stmt->bindColumn(1, $roomID);
-	$stmt->bindColumn(2, $building_ID);
-	$stmt->bindColumn(3, $roomName);
-	$stmt->bindColumn(4, $roomActive);
-	$stmt->bindColumn(5, $startOpenTime);
-	$stmt->bindColumn(6, $endOpenTime);
+	$stmt->bindColumn('building_ID', $building_ID);
+	$stmt->bindColumn('building_name', $building_name);
 
 	while ($row = $stmt->fetch(PDO::FETCH_BOUND)) {
-		$data = $roomID . "\t" . $building_ID . "\t" . $roomName . "\t" . $roomActive . "\t" . $startOpenTime . "\t" . $endOpenTime . "<br />";
+		$data = "<input type='radio' name='building' value='".$building_ID."'>".$building_name."</input>";
 		print $data;
-	}
-} catch (PDOException $e) {
+		}	
+	}catch (PDOException $e) {
     print $e->getMessage();
+		}
 }
+
 ?>
-<html>
-<head></head>
-<title></title>
-<body>
-</body
-</html>

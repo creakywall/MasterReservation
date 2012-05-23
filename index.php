@@ -36,7 +36,7 @@ if(isset($_POST['date']) && isset($_POST['btime']) && isset($_POST['etime']) && 
 			<input type="text" id="datepicker" name="date" size="30"/>
 		</p>
 		
-		<p>Time:
+		<p>Start Time:
 		  <input id="onselectExample" type="text" class="time" name="btime"/>
 		  <span id="onselectTarget" type="hidden" style="margin-left: 30px;"></span>
 		</p>

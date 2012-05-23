@@ -39,23 +39,24 @@ function getBuildings()
 		}
 }
 
-function getRoomsAvailable($building_ID)
+function getRoomsAvailable($btime,$etime)
 {
 	$dbh = initializeDBcall();
-	$sql = "SELECT r.room_ID,b.building_name,r.room_name,r.startOpenTime,r.endOpenTime FROM room r join buildings b on r.building_ID = b.building_ID where r.building_ID = '".$building_ID."'";
+	//$sql = "SELECT r.room_ID,b.building_name,r.room_name,r.startOpenTime,r.endOpenTime FROM room r join buildings b on r.building_ID = b.building_ID where r.building_ID = '".$building_ID."'";
+	$sql = "SELECT r.room_ID,r.building_ID,r.room_name,r.startOpenTime,r.endOpenTime FROM ROOM r where r.room_active = '1' and r.startOpenTime <= EXTRACT(hour_minute from '".$btime."') and r.endOpenTime >= EXTRACT(hour_minute from '".$etime."')";
 
 	try {
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute();
 
 	$stmt->bindColumn('room_ID', $room_ID);
-	$stmt->bindColumn('building_name', $building_name);
+	$stmt->bindColumn('building_ID', $building_ID);
 	$stmt->bindColumn('room_name', $room_name);
 	$stmt->bindColumn('startOpenTime', $startOpenTime);
 	$stmt->bindColumn('endOpenTime', $endOpenTime);
 
 	while ($row = $stmt->fetch(PDO::FETCH_BOUND)) {
-		$data = $room_ID." ".$building_name." ".$room_name." ".$startOpenTime." ".$endOpenTime."<br />";
+		$data = $room_ID." ".$building_ID." ".$room_name." ".$startOpenTime." ".$endOpenTime."<br />";
 		print $data;
 		}	
 	}catch (PDOException $e) {

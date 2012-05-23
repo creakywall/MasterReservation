@@ -8,8 +8,10 @@ if(isset($_GET['building']))
 	}
 ?>
 <body>
-
-	<p>Please select the number of people in your party: 
+<div class="dateTimeSelection">
+	<form method='post' action=''>
+	Please select:<br />
+	<p>People in your party:
 		<select>
 			<option value='1'>1-4</option>
 			<option value='2'>5-8</option>
@@ -18,11 +20,20 @@ if(isset($_GET['building']))
 		</select>
 	</p>
 
-		<p>Please select a date, time and duration: </p>
-<div class="dateTimeSelection">
-<p>Date: <input type="text" id="datepicker" size="30"/></p>
+		<p>Date: 
+			<input type="text" id="datepicker" size="30"/>
+		</p>
+		
+		<p>Time:
+		  <input id="onselectExample" type="text" class="time" />
+		  <span id="onselectTarget" type="hidden" style="margin-left: 30px;"></span>
+		</p>
+		
+		<p>Duration:
+		<input id="durationExample" type="text" class="time" /></p>
+		</p>
 </div>
-
+</form>
 	<p>Please select a building: </p>
 	<form method="GET" action="">
 		<?php getBuildings(); ?>

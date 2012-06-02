@@ -6,10 +6,8 @@ $date = '';
 $btime = '';
 $etime = '';
 
-if(isset($_GET['building']))
-	{
-		$building_ID = $_GET['building'];
-	}
+		//$building_ID = '1';
+	
 
 if(isset($_POST['date']) && isset($_POST['btime']) && isset($_POST['etime']) && isset($_POST['participants']))
 	{
@@ -36,7 +34,7 @@ if(isset($_POST['date']) && isset($_POST['btime']) && isset($_POST['etime']) && 
 			<input type="text" id="datepicker" name="date" size="30"/>
 		</p>
 		
-		<p>Time:
+		<p>Start Time:
 		  <input id="onselectExample" type="text" class="time" name="btime"/>
 		  <span id="onselectTarget" type="hidden" style="margin-left: 30px;"></span>
 		</p>
@@ -45,11 +43,15 @@ if(isset($_POST['date']) && isset($_POST['btime']) && isset($_POST['etime']) && 
 		<input id="durationExample" type="text" class="time" name="etime"/></p>
 		</p>
 
-		<?php //getBuildings(); ?>
+		<?//php getBuildings(); ?>
 		<br /><input type="submit" value="Submit"/>
 	</form>
 </div>
-	<?php //getRoomsAvailable($building_ID);
+	<?php 
+	$sql = "SELECT r.room_ID,r.building_ID,r.room_name,r.startOpenTime,r.endOpenTime FROM ROOM r where r.room_active = '1' and r.startOpenTime <= substr('".$btime."',5) and r.endOpenTime >= substr('".$etime."',5)";
+	echo $sql;
+	getRoomsAvailable($btime,$etime);
+
 	echo $participants."<br />".$date."<br />".$btime."<br />".$etime;
 	?>
 </body>

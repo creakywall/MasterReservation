@@ -15,8 +15,8 @@ if(isset($_POST['date']) && isset($_POST['btime']) && isset($_POST['etime']) && 
 	{
 		$participants = $_POST['participants'];
 		$date = $_POST['date'];
-		$btime = $_POST['btime'];
-		$etime = $_POST['etime'];
+		$btime = $date.' '.$_POST['btime'];
+		$etime = $date.' '.$_POST['etime'];
 	}
 ?>
 <body>
